@@ -11,7 +11,7 @@ void linear(tensor_t out, tensor_t in, tensor_t weight, tensor_t bias) {
     // Only support contiguous inputs with same shape for now.
     CHECK_SAME_DTYPE(out->dtype(), in->dtype(), weight->dtype());
     ASSERT(out->isContiguous() && in->isContiguous() && weight->isContiguous(), "linear: all tensors must be contiguous.");
-
+    // TODO: deal with bias is nullptr
     // always support cpu calculation
     if (weight->deviceType() == LLAISYS_DEVICE_CPU) {
         return cpu::linear(out->data(), in->data(), weight->data(), bias->data(), weight->dtype(), in->shape()[0], in->shape()[1], weight->shape()[0]);
